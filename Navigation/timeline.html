@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>time</title>
+
+    <link rel="canonical" href="https://codepen.io/knyttneve/pen/bgvmma">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Cardo|Pathway+Gothic+One");
+.timeline {
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 1000px;
+  position: relative;
+}
+.timeline__content-title {
+  font-weight: normal;
+  font-size: 50px;
+  margin: -10px 0 0 0;
+  transition: 0.4s;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-family: "Pathway Gothic One", sans-serif;
+  color: #fff;
+}
+.timeline__content-desc {
+  margin: 0;
+  font-size: 20px;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  font-family: Cardo;
+  font-weight: normal;
+  line-height: 25px;
+}
+.timeline:before {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  margin-left: -1px;
+  content: "";
+  background: rgba(255, 255, 255, 0.07);
+}
+@media only screen and (max-width: 767px) {
+  .timeline:before {
+    left: 40px;
+  }
+}
+.timeline-item {
+  padding: 120px 0;
+  opacity: 0.3;
+  filter: blur(2px);
+  transition: 0.5s;
+  box-sizing: border-box;
+  width: calc(50% - 40px);
+  display: flex;
+  position: relative;
+  transform: translateY(-80px);
+}
+.timeline-item:before {
+  content: attr(data-text);
+  letter-spacing: 3px;
+  width: 100%;
+  position: absolute;
+  color: rgba(255, 255, 255, 0.622);
+  font-size: 13px;
+  font-family: "Pathway Gothic One", sans-serif;
+  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  top: 70%;
+  margin-top: -5px;
+  padding-left: 15px;
+  opacity: 0;
+  right: calc(-100% - 56px);
+}
+.timeline-item:nth-child(even) {
+  align-self: flex-end;
+}
+.timeline-item:nth-child(even):before {
+  right: auto;
+  text-align: right;
+  left: calc(-100% - 56px);
+  padding-left: 0;
+  border-left: none;
+  border-right: 2px solid rgba(255, 255, 255, 0.849);
+  padding-right: 15px;
+}
+.timeline-item--active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+.timeline-item--active:before {
+  top: 50%;
+  transition: 0.3s all 0.2s;
+  opacity: 1;
+}
+.timeline-item--active .timeline__content-title {
+  margin: -50px 0 20px 0;
+}
+@media only screen and (max-width: 767px) {
+  .timeline-item {
+    align-self: baseline !important;
+    width: 100%;
+    padding: 0 30px 150px 80px;
+  }
+  .timeline-item:before {
+    left: 10px !important;
+    padding: 0 !important;
+    top: 50px;
+    text-align: center !important;
+    width: 60px;
+    border: none !important;
+  }
+  .timeline-item:last-child {
+    padding-bottom: 40px;
+  }
+}
+.timeline__img {
+  max-width: 100%;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+.timeline-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 80px 0;
+  transition: 0.7s ease 0s;
+  background-attachment: fixed;
+  background-size:cover;
+  
+}
+.timeline-container:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: 100vh;
+  background: rgba(128, 124, 124, 0.8);
+  content: "";
+}
+.timeline-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+}
+.timeline-header__title {
+  color: #fff;
+  font-size: 46px;
+  font-family: Cardo;
+  font-weight: normal;
+  margin: 0;
+}
+.timeline-header__subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Pathway Gothic One", sans-serif;
+  font-size: 16px;
+  letter-spacing: 5px;
+  margin: 10px 0 0 0;
+  font-weight: normal;
+}
+
+.demo-footer {
+  padding: 60px 0;
+  text-align: center;
+}
+.demo-footer a {
+  color: #999;
+  display: inline-block;
+  font-family: Cardo;
+}
+
+
+
+
+</style>
+
+
+</head>
+<nav>
+  <div></div>
+  <ul>
+    <li><a href="/index.html" style="width: 160px; text-decoration: none; color: inherit;">Home</a></li>
+
+  </ul>
+</nav><style>nav{
+  width:100%;
+}
+nav{
+
+  text-align: center;
+}
+nav ul li{
+  display:inline-block;
+  width:220px;
+  text-align:center;
+  font-family:serif;
+  font-variant-caps: small-caps;
+  color:#000000;
+  cursor:pointer;
+  transition:all .2s;
+  -webkit-transition:all .2s;
+}
+
+nav ul{
+  position:absolute;
+ width: 100%;
+ margin-top: 1%;
+  z-index:100;
+}
+
+</style>
+
+<body translate="no">
+  <div class="timeline-container" id="timeline-1">
+  <div class="timeline-header">
+    <h2 class="timeline-header__title">My Life Journey</h2>
+    <h3 class="timeline-header__subtitle">Life is about travel</h3>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item" data-text="Visit to Sailung">
+      <div class="timeline__content"><img class="timeline__img" src="https://lh3.googleusercontent.com/pw/AIL4fc8ZMLR69OT5S2fabt3Uuqdmo30KA0hOWd_qYFCtaLMIoTJhHvODuKT3rBWSaC23PR_AMnZ0evAtIaVTzuK82mOKB2TDKAFsjKdWFPfwSScBvMopVUWsyD6hDaJw3bnROwQnwZelg9dVOak905RUoQCl=w2160-h1620-s-no?authuser=0"/>
+        <h2 class="timeline__content-title">19th May 2023</h2>
+        <p class="timeline__content-desc">He was born in 1881 (probably in the spring) in Salonica, then an Ottoman city, now inGreece. His father Ali Riza, a customs official turned lumber merchant, died when Mustafawas still a boy. His mother Zubeyde, adevout and strong-willed woman, raised him and his sister.</p>
+      </div>. 
+    </div>
+    <div class="timeline-item" data-text="we are hero ">
+      <div class="timeline__content"><img class="timeline__img" src="https://lh3.googleusercontent.com/pw/AIL4fc9ZkETH0nmUOwvLAwfoaBILK9JKl2VFCwW0subN7Gsc_zrCAyC6KaJGNQBz9M8hpANFDgIIxv9sbgc3nks2ZLt0U6SvHNspuYYSl_AfiLIUqHgVljxiX0kCwqVU7vCiYJF0jBF8Hzn8wGLaWQS5ax0l=w1222-h1630-s-no?authuser=0"/>
+        <h2 class="timeline__content-title">1893</h2>
+        <p class="timeline__content-desc">First enrolled in a traditionalreligious school, he soon switched to a modern school. In 1893, he entered a military highschool where his mathematics teacher gave him the second name Kemal (meaning perfection)in recognition of young Mustafa's superior achievement.</p>
+      </div>
+    </div>
+    <div class="timeline-item" data-text="FATHER OF THE TURKS">
+      <div class="timeline__content"><img class="timeline__img" src="http://www.volpeypir.com/upload/3732.jpg"/>
+        <h2 class="timeline__content-title">1905</h2>
+        <p class="timeline__content-desc">In 1905, Mustafa Kemal graduated from the War Academy in Istanbul with the rank of Staff Captain. Posted in Damascus, he started with several colleagues, a clandestinesociety called "Homeland and Freedom" to fight against the Sultan'sdespotism.</p>
+      </div>
+    </div>
+    <div class="timeline-item" data-text="FATHER OF THE TURKS">
+      <div class="timeline__content"><img class="timeline__img" src="http://cdn.yemek.com/uploads/2014/11/ataturk-10-kasim.jpg"/>
+        <h2 class="timeline__content-title">1908</h2>
+        <p class="timeline__content-desc">In 1908 he helped the group of officers who toppled the Sultan. Mustafa Kemal'scareer flourished as he won his heroism in the far corners of the Ottoman Empire,including Albania and Tripoli. He also briefly served as a staff officer in Salonica andIstanbul and as a military attache in Sofia.</p>
+      </div>
+    </div>
+   
+    <div class="timeline-item" data-text="FATHER OF THE TURKS">
+      <div class="timeline__content"><img class="timeline__img" src="http://sanatkaravani.com/wp-content/uploads/2015/11/ataturk-4.jpg"/>
+        <h2 class="timeline__content-title">1922</h2>
+        <p class="timeline__content-desc">At the end of August 1922, the Turkish armieswon their ultimate victory. Within a few weeks, the Turkish mainland was completelyliberated, the armistice signed, and the rule of the Ottoman dynasty abolished</p>
+      </div>
+    </div>
+    <div class="timeline-item" data-text="we are hero ">
+      <div class="timeline__content"><img class="timeline__img" src="https://lh3.googleusercontent.com/pw/AIL4fc9ZkETH0nmUOwvLAwfoaBILK9JKl2VFCwW0subN7Gsc_zrCAyC6KaJGNQBz9M8hpANFDgIIxv9sbgc3nks2ZLt0U6SvHNspuYYSl_AfiLIUqHgVljxiX0kCwqVU7vCiYJF0jBF8Hzn8wGLaWQS5ax0l=w1222-h1630-s-no?authuser=0"/>
+        <h2 class="timeline__content-title">1893</h2>
+        <p class="timeline__content-desc">First enrolled in a traditionalreligious school, he soon switched to a modern school. In 1893, he entered a military highschool where his mathematics teacher gave him the second name Kemal (meaning perfection)in recognition of young Mustafa's superior achievement.</p>
+      </div>
+    </div>
+    <div class="timeline-item" data-text="we are hero ">
+      <div class="timeline__content"><img class="timeline__img" src="https://lh3.googleusercontent.com/pw/AIL4fc9ZkETH0nmUOwvLAwfoaBILK9JKl2VFCwW0subN7Gsc_zrCAyC6KaJGNQBz9M8hpANFDgIIxv9sbgc3nks2ZLt0U6SvHNspuYYSl_AfiLIUqHgVljxiX0kCwqVU7vCiYJF0jBF8Hzn8wGLaWQS5ax0l=w1222-h1630-s-no?authuser=0"/>
+        <h2 class="timeline__content-title">1893</h2>
+        <p class="timeline__content-desc">First enrolled in a traditionalreligious school, he soon switched to a modern school. In 1893, he entered a military highschool where his mathematics teacher gave him the second name Kemal (meaning perfection)in recognition of young Mustafa's superior achievement.</p>
+      </div>
+    </div>
+  
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+      <script id="rendered-js">
+(function ($) {
+  $.fn.timeline = function () {
+    var selectors = {
+      id: $(this),
+      item: $(this).find(".timeline-item"),
+      activeClass: "timeline-item--active",
+      img: ".timeline__img" };
+
+    selectors.item.eq(0).addClass(selectors.activeClass);
+    selectors.id.css(
+    "background-image",
+    "url(" +
+    selectors.item.
+    first().
+    find(selectors.img).
+    attr("src") +
+    ")");
+
+    var itemLength = selectors.item.length;
+    $(window).scroll(function () {
+      var max, min;
+      var pos = $(this).scrollTop();
+      selectors.item.each(function (i) {
+        min = $(this).offset().top;
+        max = $(this).height() + $(this).offset().top;
+        var that = $(this);
+        if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
+          selectors.item.removeClass(selectors.activeClass);
+          selectors.id.css(
+          "background-image",
+          "url(" +
+          selectors.item.
+          last().
+          find(selectors.img).
+          attr("src") +
+          ")");
+
+          selectors.item.last().addClass(selectors.activeClass);
+        } else if (pos <= max - 40 && pos >= min) {
+          selectors.id.css(
+          "background-image",
+          "url(" +
+          $(this).
+          find(selectors.img).
+          attr("src") +
+          ")");
+
+          selectors.item.removeClass(selectors.activeClass);
+          $(this).addClass(selectors.activeClass);
+        }
+      });
+    });
+  };
+})(jQuery);
+
+$("#timeline-1").timeline();
+//# sourceURL=pen.js
+    </script>
+
+  
+</body>
+
+</html>
